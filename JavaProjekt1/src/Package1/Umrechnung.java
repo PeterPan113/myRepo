@@ -9,16 +9,16 @@ public class Umrechnung {
 	public Umrechnung(int zahl, String wert) {
 		if(wert.toLowerCase().contains("bin")  || wert.equalsIgnoreCase("binaer")) {
 			bin = zahl;
-			hex = bin2hex();
-			dez = bin2dez();
+			hex = bin2hex(bin);
+			dez = bin2dez(bin);
 		} else if(wert.toLowerCase().contains("dez")  || wert.equalsIgnoreCase("dezimal")) {
 			dez = zahl;
-			bin = dez2bin();
+			bin = dez2bin(dez);
 		}
 	}
 
-	public int dez2bin() {
-		int x = dez;
+	public int dez2bin(int wert) {
+		int x = wert;
 		String output = "";
 		while(x>0) {
 			output = ""+(x%2)+output;
@@ -27,13 +27,22 @@ public class Umrechnung {
 		return Integer.parseInt(output);
 	}
 
-	public String bin2hex() {
-		return "";
+	public String bin2hex(int wert) {
+		String temp = ""+wert;
+		String output = "";
+		temp = lengthenString(temp);
+		while(temp.length()>0) {
+			String sub = temp.substring(0,4);
+			wert = bin2dez(Integer.parseInt(sub));
+			output += ""+getHexa(wert);
+			temp = temp.substring(4, temp.length());
+		}
+		return output;
 	}
 	
-	public int bin2dez() {
+	public int bin2dez(int wert) {
 		int output = 0;
-		String zahl = ""+bin;
+		String zahl = ""+wert;
 		for(int i=0; i<zahl.length(); i++) {
 			//  int x = Integer.parseInt(""+zahl.charAt(i));
 			int x = (int) zahl.charAt(i) -48;
@@ -41,6 +50,16 @@ public class Umrechnung {
 			
 		}
 		return output;
+	}
+	
+	public String getHexa(int wert) {
+		if(wert<10) return ""+wert;
+		else return ""+ (char) (wert+55);
+	}
+	
+	public String lengthenString(String strg) {
+		while(strg.length()%4 != 0) strg = "0"+strg;
+		return strg;
 	}
 
 	public int addBin() {

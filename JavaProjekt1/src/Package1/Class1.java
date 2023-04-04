@@ -38,7 +38,7 @@ public class Class1 {
 			 eingabe2int = Integer.parseInt(eingabe);
 		}
 		catch(RuntimeException e){
-			System.out.println("Fehler..."+e);
+			System.out.println("Fehler: "+e);
 		}
 		
 		ArrayList al = new ArrayList<Integer>();
@@ -49,7 +49,7 @@ public class Class1 {
 		
 		Umrechnung Rechnen = new Umrechnung(eingabe2int, "bin");
 		
-		System.out.println("Umrechnungsoutput: "+Rechnen.dez);
+		System.out.println("Umrechnungsoutput: "+Rechnen.hex);
 		
 	}
 
